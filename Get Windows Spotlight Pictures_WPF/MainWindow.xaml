@@ -1,0 +1,78 @@
+﻿<Window x:Class="Get_Windows_Spotlight_Pictures_WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Get_Windows_Spotlight_Pictures_WPF"
+        mc:Ignorable="d"
+        BorderThickness="10"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Windows聚焦壁纸提取小程序" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="20" Color="#323232" ShadowDepth="0" Opacity="0.5"/>
+    </Window.Effect>
+    <Grid>
+        <Button Content="退出" Margin="730 10 10 395" BorderBrush="Transparent" Background="Transparent" FontFamily="微软雅黑" FontSize="13" Foreground="#808080" Cursor="Hand" Click="Button_Click_1">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="退出" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13" >
+                                            <Label.Effect>
+                                                <DropShadowEffect Color="#AAA" BlurRadius="2" ShadowDepth="0" Opacity="0.3"/>
+                                            </Label.Effect>
+                                        </Label>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="false">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="退出" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label Content="Hi，欢迎使用Windows聚焦壁纸提取小程序" Margin="170,30,170,355" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" FontFamily="微软雅黑" FontWeight="Normal" Style="{DynamicResource SimpleLabel}"/>
+        <Border Background="LightCoral"  Margin="280,210,280,150" CornerRadius="30,30,30,30">
+            <Button Content="开始使用吧" Background="LightCoral" Width="190" Height="60" FontSize="25" FontFamily="微软雅黑" BorderThickness="0" Foreground="White" Click="Button_Click" Cursor="Hand">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Label Content="开始使用吧" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="28"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="false">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Label Content="开始使用吧" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Border>
+        <Label Content="Windows聚焦为Windows10操作系统新增功能，定期自动获取Bing高清风景图作为锁屏壁纸" Margin="120,360,120,50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="13" FontFamily="微软雅黑" FontWeight="Normal" Style="{DynamicResource SimpleLabel}"/>
+        <Label Content="-用WPF框架把以前winform版本的重做一遍，第一版本只升级外观，后续新功能敬请期待-" Margin="120,390,120,20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="10" FontFamily="微软雅黑" FontWeight="Normal" Style="{DynamicResource SimpleLabel}"/>
+    </Grid>
+</Window>

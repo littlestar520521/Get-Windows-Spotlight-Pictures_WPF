@@ -1,0 +1,49 @@
+﻿<Window x:Class="Get_Windows_Spotlight_Pictures_WPF.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Get_Windows_Spotlight_Pictures_WPF"
+        mc:Ignorable="d"
+        BorderThickness="10"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        Title="Windows聚焦壁纸提取小程序" Height="450" Width="800" ResizeMode="NoResize" WindowStyle="None">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="20" Color="#323232" ShadowDepth="0" Opacity="0.5"/>
+    </Window.Effect>
+    <Grid>
+        <Button Content="退出" Margin="730 10 10 395" BorderBrush="Transparent" Background="Transparent" FontFamily="微软雅黑" FontSize="13" Foreground="#808080" Cursor="Hand" Click="Button_Click">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="退出" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13" >
+                                            <Label.Effect>
+                                                <DropShadowEffect Color="#AAA" BlurRadius="2" ShadowDepth="0" Opacity="0.3"/>
+                                            </Label.Effect>
+                                        </Label>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="false">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="退出" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Label Content="选择图片存放位置" HorizontalAlignment="Left" Margin="80,55,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>
