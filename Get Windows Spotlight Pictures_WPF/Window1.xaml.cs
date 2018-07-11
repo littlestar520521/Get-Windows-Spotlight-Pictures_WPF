@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Drawing;
 
 namespace Get_Windows_Spotlight_Pictures_WPF
 {
@@ -19,6 +20,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
             allFiles.Visibility = Visibility.Hidden;
             startOutPut.Visibility = Visibility.Hidden;
             outPut.Visibility = Visibility.Hidden;
+            classification.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -50,11 +52,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                 path = folderBrowserDialog.SelectedPath;
                 showPath.Text = path;
             }
-            Thread.Sleep(600);
-            System.Windows.Forms.Application.DoEvents();
-
             ShowAllFiles();
-            
         }
 
         /// <summary>
@@ -97,11 +95,25 @@ namespace Get_Windows_Spotlight_Pictures_WPF
             {
                 startOutPut.Visibility = Visibility.Visible;
                 outPut.Visibility = Visibility.Visible;
-                filesOperating.CopyJPGFiles(selectedFiles0, path);
+                string[] newFiles = filesOperating.CopyJPGFiles(selectedFiles0, path);
                 for (int i = 0; i < selectedFiles0.Length; i++)
                 {
-                    outPut.Items.Add(Directory.GetFiles(path)[i]);
+                    outPut.Items.Add(newFiles[i]);
                 }
+
+                /*之前勾选了按图片尺寸进行分类*/
+                if (MainWindow.cacheCheck2 == 1)
+                {
+                    Thread.Sleep(500);
+                    System.Windows.Forms.Application.DoEvents();
+                    classification.Visibility = Visibility.Visible;
+
+                    OutPutSelectedFilesWithClassification();
+                    Thread.Sleep(1500);
+                    System.Windows.Forms.Application.DoEvents();
+                    classification.Content = "分类完成";
+                }
+
                 DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("获取成功，请去目标文件夹查看（￣︶￣）↗　", "提示", messageBoxButtons);
                 if (dialogResult == System.Windows.Forms.DialogResult.OK) 
                 {
@@ -119,6 +131,50 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         }
 
         /// <summary>
+        /// 筛选符合大小要求的文件输出至目标文件夹并按图片横竖分类
+        /// </summary>
+        private void OutPutSelectedFilesWithClassification()
+        {
+            if (!Directory.Exists(path + @"\Horizontal")) Directory.CreateDirectory(path + @"\Horizontal");
+            if (!Directory.Exists(path + @"\Vertical")) Directory.CreateDirectory(path + @"\Vertical");
+            if (!Directory.Exists(path + @"\Equal")) Directory.CreateDirectory(path + @"\Equal");
+
+            string[] imagesRaw = Directory.GetFiles(path);
+            for(int i = 0; i < imagesRaw.Length; i++)
+            {
+                string imagesRawType = Path.GetExtension(imagesRaw[i]).ToLower();
+                if (imagesRawType.Contains("jpg") || imagesRawType.Contains("bmp") || imagesRawType.Contains("png") || imagesRawType.Contains("jpeg"))
+                {
+                    FileStream fileStream = new FileStream(imagesRaw[i], FileMode.Open, FileAccess.ReadWrite, FileShare.Delete);
+                    Image image = Image.FromStream(fileStream);
+                    if (image.Width > image.Height)
+                    {
+                        /*释放读取图片尺寸的文件流，否则不能删除或移动文件*/
+                        fileStream.Close();
+                        /*目标文件夹中不存在此文件时则移动，否则删除待移动文件*/
+                        if (!File.Exists(path + @"\Horizontal\" + Path.GetFileName(imagesRaw[i])))
+                            File.Move(imagesRaw[i], path + @"\Horizontal\" + Path.GetFileName(imagesRaw[i]));
+                        else File.Delete(imagesRaw[i]);
+                    }
+                    else if (image.Width < image.Height)
+                    {
+                        fileStream.Close();
+                        if (!File.Exists(path + @"\Vertical\" + Path.GetFileName(imagesRaw[i])))
+                            File.Move(imagesRaw[i], path + @"\Vertical\" + Path.GetFileName(imagesRaw[i]));
+                        else File.Delete(imagesRaw[i]);
+                    }
+                    else
+                    {
+                        fileStream.Close();
+                        if (!File.Exists(path + @"\Equal\" + Path.GetFileName(imagesRaw[i])))
+                            File.Move(imagesRaw[i], path + @"\Equal\" + Path.GetFileName(imagesRaw[i]));
+                        else File.Delete(imagesRaw[i]);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// 非独占性延时
         /// </summary>
         /// <param name="milliseconds">延时毫秒数</param>
@@ -129,8 +185,6 @@ namespace Get_Windows_Spotlight_Pictures_WPF
             {
                 System.Windows.Forms.Application.DoEvents();
             }
-        }
-
-        
+        } 
     }
 }
