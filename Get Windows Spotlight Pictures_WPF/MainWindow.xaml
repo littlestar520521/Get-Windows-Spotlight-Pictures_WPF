@@ -13,7 +13,37 @@
         <DropShadowEffect BlurRadius="20" Color="#323232" ShadowDepth="0" Opacity="0.5"/>
     </Window.Effect>
     <Grid>
-        <Button Content="退出" Margin="730 10 10 395" BorderBrush="Transparent" Background="Transparent" FontFamily="微软雅黑" FontSize="13" Foreground="#808080" Cursor="Hand" Click="Button_Click_1">
+        <Button Content="选项" Margin="670,10 ,70 ,395" BorderBrush="Transparent" Background="Transparent" FontFamily="微软雅黑" FontSize="13" Foreground="#808080" Cursor="Hand" Click="Button_Click_2">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="选项" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13" >
+                                            <Label.Effect>
+                                                <DropShadowEffect Color="#AAA" BlurRadius="2" ShadowDepth="0" Opacity="0.3"/>
+                                            </Label.Effect>
+                                        </Label>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="false">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Label Content="选项" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#808080" FontSize="13"/>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Content="退出" Margin="730 ,10 ,10 ,395" BorderBrush="Transparent" Background="Transparent" FontFamily="微软雅黑" FontSize="13" Foreground="#808080" Cursor="Hand" Click="Button_Click_1">
             <Button.Style>
                 <Style TargetType="Button">
                     <Style.Triggers>

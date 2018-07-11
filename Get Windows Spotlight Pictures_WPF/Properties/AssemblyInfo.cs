@@ -7,12 +7,12 @@ using System.Windows;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("Get Windows Spotlight Pictures_WPF")]
+[assembly: AssemblyTitle("Windows聚焦壁纸提取小程序")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Get Windows Spotlight Pictures_WPF")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyProduct("Windows聚焦壁纸提取小程序")]
+[assembly: AssemblyCopyright("Copyright ©  2018 xuejingwei")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
