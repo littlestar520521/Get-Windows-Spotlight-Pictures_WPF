@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Media;
-using System;
 
 namespace Get_Windows_Spotlight_Pictures_WPF
 {
@@ -12,9 +12,20 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         public Settings()
         {
             InitializeComponent();
-            if (MainWindow.cacheCheck1 == 1) function1.IsChecked = true;
-            if (MainWindow.cacheCheck2 == 1) function2.IsChecked = true;
-            if (MainWindow.cacheText != 0) setSize.Text = MainWindow.cacheText.ToString();
+            if (MainWindow.cacheCheck1 == 1)
+            {
+                function1.IsChecked = true;
+            }
+
+            if (MainWindow.cacheCheck2 == 1)
+            {
+                function2.IsChecked = true;
+            }
+
+            if (MainWindow.cacheText != 0)
+            {
+                setSize.Text = MainWindow.cacheText.ToString();
+            }
         }
 
         /// <summary>
@@ -25,7 +36,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         /*取消设置*/
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         /*确认设置*/
@@ -50,7 +61,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
             {
                 MainWindow.cacheCheck2 = 0;
             }
-            this.Close();
+            Close();
         }
 
         /*勾选筛选图片大小选项*/
@@ -77,6 +88,6 @@ namespace Get_Windows_Spotlight_Pictures_WPF
 
         }
 
-        
+
     }
 }

@@ -1,5 +1,5 @@
-﻿using System.Windows;
-using System;
+﻿using System;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace Get_Windows_Spotlight_Pictures_WPF
@@ -13,7 +13,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         {
             InitializeComponent();
             string OSVersion = Environment.OSVersion.VersionString;
-            if (!OSVersion.StartsWith("Microsoft Windows NT 6.2")) 
+            if (!OSVersion.StartsWith("Microsoft Windows NT 6.2"))
             {
                 MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK;
                 DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("该小程序仅可在Windows 10操作系统下使用", "提示", messageBoxButtons);
@@ -41,7 +41,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         {
             Window1 window1 = new Window1();
             window1.Show();
-            this.Close();
+            Close();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -53,12 +53,6 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         {
             Settings settings = new Settings();
             settings.Show();
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            Wallpapers wallpapers = new Wallpapers();
-            wallpapers.Show();
         }
     }
 }

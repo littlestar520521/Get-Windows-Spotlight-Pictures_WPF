@@ -6,7 +6,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
     /// <summary>
     /// 文件操作函数集
     /// </summary>
-    class FilesOperating
+    internal class FilesOperating
     {
         /// <summary>
         /// 获取满足大小要求的文件集合
@@ -24,7 +24,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                 for (int i = 0; i < files.Length; i++)
                 {
                     FileInfo fileInfo = new FileInfo(files[i]);
-                    if (fileInfo.Length >= size * 1024) 
+                    if (fileInfo.Length >= size * 1024)
                     {
                         newFiles[j] = files[i];
                         j++;
@@ -39,7 +39,10 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                     }
                     return newFiles2;
                 }
-                else return null;
+                else
+                {
+                    return null;
+                }
             }
             catch (Exception)
             {

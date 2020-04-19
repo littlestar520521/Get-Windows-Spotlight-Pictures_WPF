@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Forms;
+using System.Drawing;
 using System.IO;
 using System.Threading;
-using System.Drawing;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace Get_Windows_Spotlight_Pictures_WPF
 {
@@ -90,7 +90,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
             FilesOperating filesOperating = new FilesOperating();
             MessageBoxButtons messageBoxButtons = MessageBoxButtons.OK;
 
-            selectedFiles0 = filesOperating.GetFilesBySize(allFiles0,allFiles0.Length,Settings.requestSize);
+            selectedFiles0 = filesOperating.GetFilesBySize(allFiles0, allFiles0.Length, Settings.requestSize);
             if (selectedFiles0 != null)
             {
                 startOutPut.Visibility = Visibility.Visible;
@@ -115,7 +115,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                 }
 
                 DialogResult dialogResult = System.Windows.Forms.MessageBox.Show("获取成功，请去目标文件夹查看（￣︶￣）↗　", "提示", messageBoxButtons);
-                if (dialogResult == System.Windows.Forms.DialogResult.OK) 
+                if (dialogResult == System.Windows.Forms.DialogResult.OK)
                 {
                     System.Windows.Application.Current.Shutdown();
                 }
@@ -127,7 +127,7 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                 {
                     System.Windows.Application.Current.Shutdown();
                 }
-            }         
+            }
         }
 
         /// <summary>
@@ -135,12 +135,23 @@ namespace Get_Windows_Spotlight_Pictures_WPF
         /// </summary>
         private void OutPutSelectedFilesWithClassification()
         {
-            if (!Directory.Exists(path + @"\Horizontal")) Directory.CreateDirectory(path + @"\Horizontal");
-            if (!Directory.Exists(path + @"\Vertical")) Directory.CreateDirectory(path + @"\Vertical");
-            if (!Directory.Exists(path + @"\Equal")) Directory.CreateDirectory(path + @"\Equal");
+            if (!Directory.Exists(path + @"\Horizontal"))
+            {
+                Directory.CreateDirectory(path + @"\Horizontal");
+            }
+
+            if (!Directory.Exists(path + @"\Vertical"))
+            {
+                Directory.CreateDirectory(path + @"\Vertical");
+            }
+
+            if (!Directory.Exists(path + @"\Equal"))
+            {
+                Directory.CreateDirectory(path + @"\Equal");
+            }
 
             string[] imagesRaw = Directory.GetFiles(path);
-            for(int i = 0; i < imagesRaw.Length; i++)
+            for (int i = 0; i < imagesRaw.Length; i++)
             {
                 string imagesRawType = Path.GetExtension(imagesRaw[i]).ToLower();
                 if (imagesRawType.Contains("jpg") || imagesRawType.Contains("bmp") || imagesRawType.Contains("png") || imagesRawType.Contains("jpeg"))
@@ -153,38 +164,40 @@ namespace Get_Windows_Spotlight_Pictures_WPF
                         fileStream.Close();
                         /*目标文件夹中不存在此文件时则移动，否则删除待移动文件*/
                         if (!File.Exists(path + @"\Horizontal\" + Path.GetFileName(imagesRaw[i])))
+                        {
                             File.Move(imagesRaw[i], path + @"\Horizontal\" + Path.GetFileName(imagesRaw[i]));
-                        else File.Delete(imagesRaw[i]);
+                        }
+                        else
+                        {
+                            File.Delete(imagesRaw[i]);
+                        }
                     }
                     else if (image.Width < image.Height)
                     {
                         fileStream.Close();
                         if (!File.Exists(path + @"\Vertical\" + Path.GetFileName(imagesRaw[i])))
+                        {
                             File.Move(imagesRaw[i], path + @"\Vertical\" + Path.GetFileName(imagesRaw[i]));
-                        else File.Delete(imagesRaw[i]);
+                        }
+                        else
+                        {
+                            File.Delete(imagesRaw[i]);
+                        }
                     }
                     else
                     {
                         fileStream.Close();
                         if (!File.Exists(path + @"\Equal\" + Path.GetFileName(imagesRaw[i])))
+                        {
                             File.Move(imagesRaw[i], path + @"\Equal\" + Path.GetFileName(imagesRaw[i]));
-                        else File.Delete(imagesRaw[i]);
+                        }
+                        else
+                        {
+                            File.Delete(imagesRaw[i]);
+                        }
                     }
                 }
             }
         }
-
-        /// <summary>
-        /// 非独占性延时
-        /// </summary>
-        /// <param name="milliseconds">延时毫秒数</param>
-        private void Delay(int milliseconds)
-        {
-            int start = Environment.TickCount;
-            while (Math.Abs(Environment.TickCount - start) > milliseconds)
-            {
-                System.Windows.Forms.Application.DoEvents();
-            }
-        } 
     }
 }
